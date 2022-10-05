@@ -24,6 +24,14 @@ public class PlayerMov : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown("space"))
+        {
+            GetComponent<Hotaru>().StartHum();
+        }
+        else if (Input.GetKeyUp("space"))
+        {
+            GetComponent<Hotaru>().StopHum();
+        }
     }
 
     private void FixedUpdate()

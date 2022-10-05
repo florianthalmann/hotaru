@@ -1,4 +1,5 @@
 using System.Linq;
+using static System.Math;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +17,40 @@ public class Hotaru : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		source = GetComponent<AudioSource>();
-		if (source) print(source.volume);
 		speed = Random.Range(swarm.minSpeed, swarm.maxSpeed);
         frequency = Random.Range(50, 400);
         growth = 0.01f*Random.value;
     }
+
+	void InitHum()
+    {
+		source = gameObject.AddComponent<AudioSource>();
+		//source.clip = Resources.Load<AudioClip>("Sounds/"
+		//    + Path.GetFileNameWithoutExtension(audioFiles[i%audioFiles.Length].Name));
+		//int clip = Random.Range(0, 4);
+		//source.clip = Resources.Load<AudioClip>("Sounds/buzz"+clip);
+		source.clip = Resources.Load<AudioClip>("Sounds/hum");
+		int pitch = Random.Range(-24, 24);
+		source.pitch = (float)Pow(2f, pitch != 0 ? pitch / 12f : 0);
+		print(source.pitch);
+		source.volume = 0.0f;
+		source.loop = true;
+		source.spatialBlend = 1;
+		source.dopplerLevel = 0.5f;
+		source.maxDistance = swarm.manager.maxSoundDistance;
+		source.rolloffMode = AudioRolloffMode.Custom;
+		source.reverbZoneMix = 1;
+		gameObject.AddComponent<AudioEchoFilter>();
+	}
+
+	public void StartHum() {
+		if (!source) { InitHum(); }
+		source.Play();
+	}
+
+	public void StopHum() {
+		source.Stop();
+	}
 
     // Update is called once per frame
     void Update()

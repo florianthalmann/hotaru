@@ -1,5 +1,4 @@
 using System.IO;
-using static System.Math;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,23 +41,10 @@ public class Swarm : MonoBehaviour
                 Random.Range(manager.bounds.min.y, manager.bounds.max.y),
                 Random.Range(manager.bounds.min.z, manager.bounds.max.z));
             //25*(Random.insideUnitSphere + new Vector3(0, 1, 0));
-            hotaru[i+1] = Instantiate(hotaruPrefab, position, Quaternion.identity);
-            hotaru[i+1].GetComponent<Hotaru>().swarm = this;
+            hotaru[i + 1] = Instantiate(hotaruPrefab, position, Quaternion.identity);
+            hotaru[i + 1].GetComponent<Hotaru>().swarm = this;
             //spheres[i].GetComponent<Rigidbody>().velocity = Random.onUnitSphere*speed;
-            AudioSource source = hotaru[i+1].AddComponent<AudioSource>();
-            //source.clip = Resources.Load<AudioClip>("Sounds/"
-            //    + Path.GetFileNameWithoutExtension(audioFiles[i%audioFiles.Length].Name));
-            int clip = Random.Range(0, 4);
-            source.clip = Resources.Load<AudioClip>("Sounds/buzz"+clip);
-            int pitch = Random.Range(-12, 12)*2;
-            source.pitch = (float)Pow(2f, pitch != 0 ? 1f / pitch : 0);
-            source.volume = 0.0f;
-            source.loop = true;
-            source.spatialBlend = 1;
-            source.dopplerLevel = 0.5f;
-            source.maxDistance = manager.maxSoundDistance;
-            source.rolloffMode = AudioRolloffMode.Custom;
-            source.Play();
+            hotaru[i + 1].GetComponent<Hotaru>().StartHum();
         }
     }
 
