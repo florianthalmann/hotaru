@@ -26,11 +26,11 @@ public class PlayerMov : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown("space"))
         {
-            GetComponent<Hotaru>().StartHum();
+            GetComponent<Hotaru>().StartSinging();
         }
         else if (Input.GetKeyUp("space"))
         {
-            GetComponent<Hotaru>().StopHum();
+            GetComponent<Hotaru>().StopSinging();
         }
     }
 

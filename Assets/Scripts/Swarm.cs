@@ -44,7 +44,7 @@ public class Swarm : MonoBehaviour
             hotaru[i + 1] = Instantiate(hotaruPrefab, position, Quaternion.identity);
             hotaru[i + 1].GetComponent<Hotaru>().swarm = this;
             //spheres[i].GetComponent<Rigidbody>().velocity = Random.onUnitSphere*speed;
-            hotaru[i + 1].GetComponent<Hotaru>().StartHum();
+            hotaru[i + 1].GetComponent<Hotaru>().StartSinging();
         }
     }
 
